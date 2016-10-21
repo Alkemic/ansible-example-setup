@@ -1,0 +1,9 @@
+[apps]
+app0.local
+app1.local
+
+[db]
+db0.local
+
+[cache]
+memcache0.local
