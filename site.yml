@@ -3,7 +3,8 @@
 
 - name: apply common configuration to all nodes
   hosts: all
-  remote_user: root
+  sudo: true
+  remote_user: vagrant
 
   roles:
     - common
@@ -11,14 +12,33 @@
 
 - name: configure and deploy the webservers and application code
   hosts: apps
-  remote_user: root
+  sudo: true
+  remote_user: vagrant
 
   roles:
-    - web
+    - common
 
 - name: deploy MySQL and configure the databases
   hosts: db
-  remote_user: root
+  sudo: true
+  remote_user: vagrant
 
-  roles:
-    - db
+  tasks:
+     - apt: name=mysql-server state=present
+
+- name: Setup cache (memcached)
+  hosts: cache
+  sudo: true
+  remote_user: vagrant
+
+  tasks:
+    - name: Install memcached
+      apt: name=memcached state=present
+
+    - name: Update the memcached config
+      action: copy src=config/memcached.conf dest=/etc/memcached.conf
+      notify: Restart memcached
+
+  handlers:
+    - name: Restart memcached
+      action: service name=memcached state=restarted

@@ -8,21 +8,26 @@ Vagrant.configure("2") do |config|
   config.vm.define "manager" do |manager|
     manager.vm.synced_folder ".", "/home/vagrant/ansible"
     manager.vm.host_name = "manager.local"
-    manager.vm.network "private_network", ip: "192.168.1.101"
+    manager.vm.network "private_network", ip: "192.168.11.101"
   end
 
-  config.vm.define "db0" do |app0|
-    test0.vm.host_name = "db0.local"
-    test0.vm.network "private_network", ip: "192.168.1.110"
+  config.vm.define "db0" do |db0|
+    db0.vm.host_name = "db0.local"
+    db0.vm.network "private_network", ip: "192.168.11.110"
   end
 
   config.vm.define "app0" do |app0|
-    test0.vm.host_name = "app0.local"
-    test0.vm.network "private_network", ip: "192.168.1.120"
+    app0.vm.host_name = "app0.local"
+    app0.vm.network "private_network", ip: "192.168.11.120"
   end
 
   config.vm.define "app1" do |app1|
-    test0.vm.host_name = "app1.local"
-    test0.vm.network "private_network", ip: "192.168.1.121"
+    app1.vm.host_name = "app1.local"
+    app1.vm.network "private_network", ip: "192.168.11.121"
+  end
+
+  config.vm.define "memcache0" do |memcache0|
+    memcache0.vm.host_name = "memcache0.local"
+    memcache0.vm.network "private_network", ip: "192.168.11.130"
   end
 end

@@ -1,9 +1,13 @@
 [apps]
-app0.local
-app1.local
+; app0.local
+192.168.11.120
+; app1.local
+192.168.11.121
 
 [db]
-db0.local
+; db0.local
+192.168.11.110
 
 [cache]
-memcache0.local
+; memcache0.local
+192.168.11.130
