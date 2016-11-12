@@ -18,6 +18,14 @@
   roles:
     - common
 
+- name: configure nginx reverse proxy
+  hosts: nginx
+  sudo: true
+  remote_user: vagrant
+
+  roles:
+    - nginx
+
 - name: deploy MySQL and configure the databases
   hosts: db
   sudo: true

@@ -11,3 +11,7 @@
 [cache]
 ; memcache0.local
 192.168.11.130
+
+[nginx]
+; nginx.local
+192.168.11.200

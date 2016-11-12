@@ -30,4 +30,10 @@ Vagrant.configure("2") do |config|
     memcache0.vm.host_name = "memcache0.local"
     memcache0.vm.network "private_network", ip: "192.168.11.130"
   end
+
+  config.vm.define "nginx" do |nginx|
+    nginx.vm.host_name = "nginx.local"
+    nginx.vm.network "private_network", ip: "192.168.11.200"
+    nginx.vm.network :forwarded_port, guest: 80, host: 18080
+  end
 end
