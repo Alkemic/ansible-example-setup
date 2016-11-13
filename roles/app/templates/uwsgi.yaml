@@ -1,0 +1,9 @@
+uwsgi:
+  socket: 0.0.0.0:{{ app_port }}
+  master: 1
+  module: django.core.handlers.wsgi:WSGIHandler()
+  workers: 2
+  pythonpath: {{ app_path }}
+  pythonpath: /home/{{ app_user }}/virtualenv/
+  env: DJANGO_SETTINGS_MODULE=dc.settings
+  harakiri: 60

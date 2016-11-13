@@ -1,0 +1,5 @@
+- include: setup_virtualenv.yml
+
+- include: setup_app_code.yml
+
+- include: setup_supervisor.yml

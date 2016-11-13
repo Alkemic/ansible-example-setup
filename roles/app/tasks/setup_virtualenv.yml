@@ -1,0 +1,22 @@
+- name: Install packages
+  apt: name={{ item }} update_cache=yes state=latest
+  with_items:
+    - python
+    - python-pip
+
+- name: Install virtualenv
+  pip: name=virtualenv
+  tags: packages
+
+- name: Create the virtualenv
+  command: virtualenv {{ app_virtualenv_path }} --no-site-packages
+    creates={{ app_virtualenv_path }}/bin/activate
+
+- name: Install uwsgi in virtualenv
+  pip: virtualenv={{ app_virtualenv_path }} name=uwsgi
+
+- name: Copy uwsgi config
+  template: src=uwsgi.yaml
+    dest={{ app_user_home_dir }}/uwsgi.yaml
+    owner={{ app_user }}
+    group={{ app_group }}

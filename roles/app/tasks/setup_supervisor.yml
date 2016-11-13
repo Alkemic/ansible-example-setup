@@ -1,0 +1,15 @@
+---
+
+- name: Install packages
+  apt: name={{ item }} update_cache=yes state=latest
+  with_items:
+    - supervisor
+
+- name: Create the Supervisor config file
+  template: src=supervisor_app.conf dest=/etc/supervisor/conf.d/{{ app_name }}.conf
+
+- name: Re-read the Supervisor config files
+  supervisorctl: name={{ app_name }} state=present
+
+- name: Restart Supervisor
+  supervisorctl: name={{ app_name }} state=restarted
