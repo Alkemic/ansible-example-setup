@@ -1,0 +1,3 @@
+[client]
+user={{ database_root_user }}
+password="{{ database_root_pass }}"

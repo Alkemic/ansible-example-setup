@@ -1,2 +1,27 @@
 ---
 app_port: 9090
+
+database_name: test_db
+database_user: test_db_user
+database_pass: test_db_pass
+
+database_root_user: root
+database_root_pass: root_db_pass
+
+mysql_user_home: /root
+mysql_root_username: root
+mysql_root_password: root
+mysql_datadir: /var/lib/mysql/
+
+app_user: web_user
+app_group: web_group
+app_user_home_dir: /home/{{ app_user }}
+
+app_path: /home/{{ app_user }}/app/
+app_log_path: /home/{{ app_user }}/logs/
+app_git_repo: https://github.com/Alkemic/webpage.git
+app_git_branch: master
+
+app_virtualenv_path: /home/{{ app_user }}/virtualenv/
+
+app_name: sample_app
