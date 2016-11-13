@@ -9,6 +9,7 @@ Vagrant.configure("2") do |config|
     manager.vm.synced_folder ".", "/home/vagrant/ansible"
     manager.vm.host_name = "manager.local"
     manager.vm.network "private_network", ip: "192.168.11.101"
+    manager.vm.provision :shell, path: "bootstrap.sh"
   end
 
   config.vm.define "db0" do |db0|
