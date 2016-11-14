@@ -16,8 +16,6 @@
     virtualenv={{ app_virtualenv_path }}
   tags: packages
 
-- pip: virtualenv={{ app_virtualenv_path }} name=Django version=1.8
-
 - name: Copy settings_local.py
   template: src=settings_local.py
     dest={{ app_path }}/dc/settings_local.py
