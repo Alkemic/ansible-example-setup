@@ -15,7 +15,6 @@
   remote_user: vagrant
 
   roles:
-    - common
     - app
 
 - name: configure nginx reverse proxy
@@ -50,3 +49,14 @@
   handlers:
     - name: Restart memcached
       action: service name=memcached state=restarted
+
+- name: Run migrations
+  hosts: db_opt
+  sudo: true
+  remote_user: vagrant
+
+  tasks:
+    - name: Migrate database
+      shell: "{{ app_virtualenv_path }}/bin/python {{ app_path }}/manage.py syncdb --noinput"
+      # shell: "{{ app_virtualenv_path }}/bin/python {{ app_path }}/manage.py migrate --noinput"
+      check_mode: no

@@ -1,0 +1,21 @@
+- name: Install packages
+  apt: name={{ item }} update_cache=yes state=latest
+  with_items:
+    - git
+    - libmysqlclient-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - python
+    - python-pip
+    - supervisor
+  tags: packages
+
+- name: Create the application user
+  user: name={{ app_user }} state=present
+
+- name: Create the application group
+  group: name={{ app_group }} system=yes state=present
+
+- name: Add the application user to the application group
+  user: name={{ app_user }} group={{ app_group }} state=present
+

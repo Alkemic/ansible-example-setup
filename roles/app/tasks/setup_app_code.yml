@@ -1,20 +1,4 @@
-- name: Install packages
-  apt: name={{ item }} update_cache=yes state=latest
-  with_items:
-    - git
-    - libmysqlclient-dev
-    - libxml2-dev
-    - libxslt1-dev
-
-- name: Create the application user
-  user: name={{ app_user }} state=present
-
-- name: Create the application group
-  group: name={{ app_group }} system=yes state=present
-
-- name: Add the application user to the application group
-  user: name={{ app_user }} group={{ app_group }} state=present
-
+---
 - name: Clone source code
   git: repo={{ app_git_repo }}
     version={{ app_git_branch }}
@@ -29,7 +13,10 @@
 
 - name: Install requirements.txt
   pip: requirements={{ app_path }}/requirements.txt
-       virtualenv={{ app_virtualenv_path }}
+    virtualenv={{ app_virtualenv_path }}
+  tags: packages
+
+- pip: virtualenv={{ app_virtualenv_path }} name=Django version=1.8
 
 - name: Copy settings_local.py
   template: src=settings_local.py
@@ -37,6 +24,8 @@
     owner={{ app_user }}
     group={{ app_group }}
 
-
 - name: Create log directory
   file: path={{ app_log_path }} state=directory mode=0755
+
+- name: Restart application
+  supervisorctl: name={{ app_name }} state=restarted
