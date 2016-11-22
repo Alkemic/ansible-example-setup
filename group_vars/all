@@ -19,9 +19,12 @@ app_user_home_dir: /home/{{ app_user }}
 
 app_path: /home/{{ app_user }}/app/
 app_log_path: /home/{{ app_user }}/logs/
-app_git_repo: https://github.com/Alkemic/webpage.git
+app_git_repo: https://github.com/Alkemic/django-sample-app
 app_git_branch: master
 
 app_virtualenv_path: /home/{{ app_user }}/virtualenv/
 
 app_name: sample_app
+
+app_media_path: /home/{{ app_user }}/media/
+app_static_path: /home/{{ app_user }}/static/

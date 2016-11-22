@@ -1,9 +1,5 @@
 # -*- coding:utf-8 -*-
-"""
-Installation specific settings.
-Copy this file to settings_local.py, and fill up.
-"""
-from settings import PROJECT_NAME
+from default import *
 
 ADMINS = (
     ('admin', 'admin@dummy-domain.com'),
@@ -11,12 +7,15 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-LOCAL_MIDDLEWARE_CLASSES = ()
-
-LOCAL_INSTALLED_APPS = ()
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+COMPRESS_ENABLED = True
 
 MEDIA_URL = '/media/'
+MEDIA_PATH = '{{ app_media_path }}'
+
 STATIC_URL = '/static/'
+STATIC_PATH = '{{ app_static_path }}'
 
 DATABASES = {
     'default': {
@@ -35,12 +34,3 @@ CACHES = {
         'LOCATION': '{{ groups['cache'][0] }}:11211',
     }
 }
-
-GOOGLE_SITE_VERIFICATION = ''
-
-ALLOWED_HOSTS = ['*']
-
-DEBUG = False
-TEMPLATE_DEBUG = DEBUG
-
-IS_WIP = False

@@ -18,7 +18,7 @@
 
 - name: Copy settings_local.py
   template: src=settings_local.py
-    dest={{ app_path }}/dc/settings_local.py
+    dest={{ app_path }}/projectname/settings/local.py
     owner={{ app_user }}
     group={{ app_group }}
 
